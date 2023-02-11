@@ -1,0 +1,65 @@
+{
+    "jornada": 4,
+    "partits": [
+        {
+            "equip_local": 1,
+            "equip_visitant": 2
+        },
+        {
+            "equip_local": 3,
+            "equip_visitant": 4
+        },
+        {
+            "equip_local": 5,
+            "equip_visitant": 6
+        },
+        {
+            "equip_local": 7,
+            "equip_visitant": 8
+        },
+        {
+            "equip_local": 9,
+            "equip_visitant": 10
+        },
+        {
+            "equip_local": 11,
+            "equip_visitant": 12
+        },
+        {
+            "equip_local": 13,
+            "equip_visitant": 14
+        },
+        {
+            "equip_local": 15,
+            "equip_visitant": 16
+        },
+        {
+            "equip_local": 17,
+            "equip_visitant": 18
+        },
+        {
+            "equip_local": 19,
+            "equip_visitant": 20
+        },
+        {
+            "equip_local": 21,
+            "equip_visitant": 22
+        },
+        {
+            "equip_local": 23,
+            "equip_visitant": 24
+        },
+        {
+            "equip_local": 25,
+            "equip_visitant": 26
+        },
+        {
+            "equip_local": 27,
+            "equip_visitant": 28
+        },
+        {
+            "equip_local": 29,
+            "equip_visitant": 30
+        }
+    ]
+}
