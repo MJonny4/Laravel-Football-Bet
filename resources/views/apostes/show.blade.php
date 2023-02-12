@@ -23,13 +23,13 @@
                             <td>{{ $partit->Visitant }}</td>
                             <input type="hidden" name="partit[{{ $partit->id }}]" value="{{ $partit->id }}">
                             <td><input type="radio" name="aposta[{{ $partit->id }}]" value="1"
-                                       @if($apostes->where('id_partit', $partit->id)->first()->resultat == 1) checked @endif>
+                                      @if($apostes->where('id_partit', $partit->id)->first()->resultat == 1) checked @endif>
                             </td>
                             <td><input type="radio" name="aposta[{{ $partit->id }}]" value="X"
-                                       @if($apostes->where('id_partit', $partit->id)->first()->resultat == 'X') checked @endif>
+                                      @if($apostes->where('id_partit', $partit->id)->first()->resultat == 'X') checked @endif>
                             </td>
                             <td><input type="radio" name="aposta[{{ $partit->id }}]" value="2"
-                                       @if($apostes->where('id_partit', $partit->id)->first()->resultat == 2) checked @endif>
+                                      @if($apostes->where('id_partit', $partit->id)->first()->resultat == 2) checked @endif>
                             </td>
                         </tr>
                     @endforeach
