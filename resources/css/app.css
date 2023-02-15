@@ -30,3 +30,7 @@ tbody, td, th {
     border-style: solid !important;
     border-width: 3px !important;
 }
+
+input[type="radio"] {
+    background-color: lightblue;
+}

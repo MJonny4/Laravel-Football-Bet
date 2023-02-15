@@ -37,6 +37,10 @@ class ApostesController extends Controller
 
     public function store(Request $request, Jornada $jornada)
     {
+        if (count($request->aposta) != 15) {
+            return redirect()->route('apostes.show', $jornada->id)->with('status', 'Has de seleccionar 15 partits per poder fer les apostes');
+        }
+
         foreach ($request->aposta as $key => $value) {
             $aposta = new Aposta();
             $aposta->id_partit = $key;
@@ -47,7 +51,8 @@ class ApostesController extends Controller
             $aposta->resultat = $value;
             $aposta->save();
         }
-        return redirect()->route('apostes.index')->with('status', 'Apostes guardades correctament');
+
+        return redirect()->route('apostes.index')->with('status', 'Apostes fetes correctament');
     }
 
     public function create()
