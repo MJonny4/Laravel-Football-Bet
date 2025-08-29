@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -9,15 +10,20 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // ! Només utilitzar una vegada
-        $this->call(EquipsSeeder::class);
-        $this->call(JornadesSeeder::class);
-        $this->call(PartitsSeeder::class);
-        $this->call(AdminSeeder::class);
+        $this->call([
+            TeamSeeder::class,
+            SeasonSeeder::class,
+            GameweekSeeder::class,
+            MatchSeeder::class,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'date_of_birth' => '1990-01-01',
+        ]);
     }
 }

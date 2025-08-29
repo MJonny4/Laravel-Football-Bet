@@ -1,36 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap');
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
 
-h1,
-h2,
-b,
-h4 {
-    font-family: 'Ubuntu', sans-serif !important;
-    color: mediumpurple !important;
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Light Smoke Background */
+    --color-smoke-50: #fafaf9;
+    --color-smoke-100: #f5f5f4;
+    --color-smoke-200: #e7e5e4;
+    --color-smoke-300: #d6d3d1;
+    --color-smoke-400: #a8a29e;
+    --color-smoke-500: #78716c;
+    --color-smoke-600: #57534e;
+    --color-smoke-700: #44403c;
+    --color-smoke-800: #292524;
+    --color-smoke-900: #1c1917;
+
+    /* Primary - Calming Blue-Green */
+    --color-primary-50: #f0fdfa;
+    --color-primary-100: #ccfbf1;
+    --color-primary-200: #99f6e4;
+    --color-primary-300: #5eead4;
+    --color-primary-400: #2dd4bf;
+    --color-primary-500: #14b8a6;
+    --color-primary-600: #0d9488;
+    --color-primary-700: #0f766e;
+    --color-primary-800: #115e59;
+    --color-primary-900: #134e4a;
+
+    /* Secondary - Warm Stone */
+    --color-secondary-50: #fafaf9;
+    --color-secondary-100: #f5f5f4;
+    --color-secondary-200: #e7e5e4;
+    --color-secondary-300: #d6d3d1;
+    --color-secondary-400: #a8a29e;
+    --color-secondary-500: #78716c;
+    --color-secondary-600: #57534e;
+    --color-secondary-700: #44403c;
+    --color-secondary-800: #292524;
+    --color-secondary-900: #1c1917;
+
+    /* Accent - Soft Coral */
+    --color-accent-50: #fef7f7;
+    --color-accent-100: #fdeaea;
+    --color-accent-200: #fbd5d5;
+    --color-accent-300: #f8b4b4;
+    --color-accent-400: #f87171;
+    --color-accent-500: #ef4444;
+    --color-accent-600: #dc2626;
+    --color-accent-700: #b91c1c;
+    --color-accent-800: #991b1b;
+    --color-accent-900: #7f1d1d;
+
+    /* Override zinc with smoke colors */
+    --color-zinc-50: var(--color-smoke-50);
+    --color-zinc-100: var(--color-smoke-100);
+    --color-zinc-200: var(--color-smoke-200);
+    --color-zinc-300: var(--color-smoke-300);
+    --color-zinc-400: var(--color-smoke-400);
+    --color-zinc-500: var(--color-smoke-500);
+    --color-zinc-600: var(--color-smoke-600);
+    --color-zinc-700: var(--color-smoke-700);
+    --color-zinc-800: var(--color-smoke-800);
+    --color-zinc-900: var(--color-smoke-900);
+    --color-zinc-950: #0c0a09;
+
+    --color-accent: var(--color-primary-600);
+    --color-accent-content: var(--color-primary-600);
+    --color-accent-foreground: var(--color-white);
 }
 
-.nav-link:hover {
-    color: rebeccapurple;
-    background-color: lightblue;
-    border-color: purple;
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
 }
 
-.nav-link:hover.btn {
-    color: rebeccapurple;
-    background-color: lightblue;
-    border-radius: 0px;
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
 }
 
-.card, catrd-header, card-body, card-footer {
-    border-radius: 0px;
-    /*color: lightpink;*/
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
 }
 
-tbody, td, th {
-    border-color: inherit !important;
-    border-style: solid !important;
-    border-width: 3px !important;
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
 }
 
-input[type="radio"] {
-    background-color: lightblue;
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */

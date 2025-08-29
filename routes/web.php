@@ -1,41 +1,46 @@
 <?php
 
-use App\Http\Controllers\ApostesController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\JornadesController;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Public routes
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
-Route::view('/', 'inici')->name('inici');
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 
-Route::get('/jornada', [JornadesController::class, 'index'])->name('jornades.index');
-Route::get('/jornada/{jornada}', [JornadesController::class, 'show'])->name('jornades.show');
-Route::post('/jornada/store', [JornadesController::class, 'store'])->name('jornades.store');
-Route::get('/jornada/{jornada}/export', [JornadesController::class, 'export'])->name('jornades.export');
+Route::get('/age-verification', function() {
+    return view('auth.age-verification');
+})->name('age-verification')->middleware('auth');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/apostes', [ApostesController::class, 'index'])->name('apostes.index');
-    Route::get('/apostes/{jornada}', [ApostesController::class, 'show'])->name('apostes.show');
-    Route::post('/apostes/{jornada}/store', [ApostesController::class, 'store'])->name('apostes.store');
-    Route::put('/apostes/{jornada}/update', [ApostesController::class, 'update'])->name('apostes.update');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    
+    // Settings routes
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Volt::route('profile', 'settings.profile')
+            ->name('profile');
+        
+        Volt::route('password', 'settings.password')
+            ->name('password');
+        
+        Volt::route('appearance', 'settings.appearance')
+            ->name('appearance');
+    });
 });
 
-Route::view('/login', 'auth.login')->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::middleware(['auth', 'verified', 'adult'])->group(function () {
+    Route::get('/betting', [App\Http\Controllers\BettingController::class, 'index'])->name('betting.index');
+    Route::get('/leaderboard', [App\Http\Controllers\LeaderboardController::class, 'index'])->name('leaderboard.index');
+    Route::get('/teams', [App\Http\Controllers\TeamController::class, 'index'])->name('teams.index');
+});
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-Route::view('/register', 'auth.register')->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store']);
-Route::get('/activar/{token}', [RegisteredUserController::class, 'activar'])->name('activar');
+require __DIR__.'/auth.php';
